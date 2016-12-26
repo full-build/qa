@@ -15,4 +15,4 @@ notifications:
   - provider: Slack
     incoming_webhook:
       secure: gA2eVzMFIFRHZpWx6bDTbKCKGFOWEe3zRukzC4PTWklKnLTsIzm/TLqa/oGgPSFiSR7DsBLKpp1Tkd4eIEy2QlzqAwFx4IknxGh4igmbB7k=
-    channel: '#qa'
+    channel: '#tests'
