@@ -14,6 +14,8 @@ rmdir /s /q %QAFOLDER%
 %PAKETBOOTSTRAP%
 %PAKET% restore || goto :ko
 %PAKET% update || goto :ko
+type %HERE%paket.lock
+
 %FULLBUILD% setup git https://github.com/pchalamet/cassandra-sharp-full-build %HERE%binrepo %QAFOLDER% || goto :ko
 cd %QAFOLDER% || goto :ko
 
