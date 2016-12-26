@@ -1,5 +1,4 @@
 source https://www.nuget.org/api/v2/
-nuget FsUnit
 nuget Paket
-nuget FSharp.Data
-nuget full-build
+nuget full-build 3.2.397-alpha
+nuget NUnit.runners

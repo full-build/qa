@@ -1,11 +1,17 @@
+setlocal
 set HERE=%~dp0
 set PAKETBOOTSTRAP=%HERE%tools/paket.bootstrapper.exe
 set PAKET=%HERE%tools/paket.exe
 set FULLBUILD=%HERE%packages/full-build/tools/fullbuild.exe
 
-%PAKETBOOTSTRAP%
+set PATH=%PATH%;%HERE%packages\Paket\tools
+set PATH=%PATH%;%HERE%packages\NUnit.ConsoleRunner\tools
+set PATH=%PATH%;%HERE%packages\full-build\tools
 
 set QAFOLDER=%HERE%qa-cassandrasharp
+rmdir /s /q %QAFOLDER%
+
+%PAKETBOOTSTRAP%
 %PAKET% restore || goto :ko
 %FULLBUILD% setup git https://github.com/pchalamet/cassandra-sharp-full-build %HERE%binrepo %QAFOLDER% || goto :ko
 cd %QAFOLDER% || goto :ko
