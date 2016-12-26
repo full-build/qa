@@ -1,4 +1,4 @@
 source https://www.nuget.org/api/v2/
 nuget Paket
-nuget full-build 3.2.397-alpha
+nuget full-build prerelease
 nuget NUnit.runners
