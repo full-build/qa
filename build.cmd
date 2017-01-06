@@ -31,11 +31,11 @@ cd %QAFOLDER% || goto :ko
 %FULLBUILD% describe view all || goto :ko
 %FULLBUILD% graph all || goto :ko
 %FULLBUILD% build all || goto :ko
-%FULLBUILD% history || goto :ko
+rem %FULLBUILD% history || goto :ko
 %FULLBUILD% drop view csc || goto :ko
 %FULLBUILD% outdated package || goto :ko
 %FULLBUILD% update package || goto :ko
-%FULLBUILD% push 42 || goto :ko
+rem %FULLBUILD% push 42 || goto :ko
 
 :ok
 echo *** SUCCESSFUL
