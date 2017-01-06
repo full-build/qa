@@ -24,6 +24,7 @@ cd %QAFOLDER% || goto :ko
 %FULLBUILD% clone *  || goto :ko
 %FULLBUILD% index * || goto :ko
 %FULLBUILD% convert * || goto :ko
+%FULLBUILD% install || goto :ko
 %FULLBUILD% view all * || goto :ko
 %FULLBUILD% view csc cassandra-sharp-contrib/* || goto :ko
 %FULLBUILD% list view || goto :ko
