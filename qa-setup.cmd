@@ -12,7 +12,7 @@ set LOCALFBREPO=%HERE%local\full-build
 set LOCALCSREPO=%HERE%local\cassandra-sharp
 set LOCALCSCREPO=%HERE%local\cassandra-sharp-contrib
 set LOCALBIN=%HERE%local\bin
-set QAFOLDER=%HERE%qa-cassandrasharp
+set QAFOLDER=%HERE%qa-setup
 rmdir /s /q %QAFOLDER%
 
 %FULLBUILD% setup git %LOCALFBREPO% %LOCALBIN% %QAFOLDER% || goto :ko
@@ -23,8 +23,8 @@ cd %QAFOLDER% || goto :ko
 %FULLBUILD% add repo cassandra-sharp-contrib %LOCALCSCREPO% || goto :ko
 %FULLBUILD% clone *  || goto :ko
 %FULLBUILD% index * || goto :ko
-%FULLBUILD% convert * || goto :ko
 %FULLBUILD% install || goto :ko
+%FULLBUILD% convert * || goto :ko
 %FULLBUILD% view all * || goto :ko
 %FULLBUILD% view csc cassandra-sharp-contrib/* || goto :ko
 %FULLBUILD% list view || goto :ko
@@ -37,6 +37,26 @@ cd %QAFOLDER% || goto :ko
 %FULLBUILD% push --full 42 || goto :ko
 %FULLBUILD% branch || goto :ko
 %FULLBUILD% history || goto :ko
+
+
+pushd .full-build
+git add *
+git commit -am "qa"
+git push origin master:master
+popd
+
+pushd cassandra-sharp
+git add *
+git commit -am "qa"
+git push origin master:master
+popd
+
+pushd cassandra-sharp-contrib
+git add *
+git commit -am "qa"
+git push origin master:master
+popd
+
 
 :ok
 echo *** SUCCESSFUL

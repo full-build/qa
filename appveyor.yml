@@ -11,7 +11,8 @@ shallow_clone: true
 build_script:
   - cmd: |
       prepare.cmd
-      build-setup.cmd
+      qa-setup.cmd
+      qa-init.cmd
 
 test: off
   

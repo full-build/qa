@@ -19,14 +19,22 @@ rem creating master repository
 mkdir %LOCALFBREPO%
 git init %LOCALFBREPO%
 pushd %LOCALFBREPO%
+git config --local receive.denyCurrentBranch updateInstead
 echo dummy > dummy.txt
 git add dummy.txt
 git commit -am "initial commit"
 popd
 
 rem cloning repositories
-git clone https://github.com/pchalamet/cassandra-sharp %LOCALFOLDER%\cassandra-sharp
-git clone https://github.com/pchalamet/cassandra-sharp-contrib %LOCALFOLDER%\cassandra-sharp-contrib
+git clone https://github.com/pchalamet/cassandra-sharp %LOCALCSREPO%
+pushd %LOCALCSREPO%
+git config --local receive.denyCurrentBranch updateInstead
+popd
+
+git clone https://github.com/pchalamet/cassandra-sharp-contrib %LOCALCSCREPO%
+pushd %LOCALCSCREPO%
+git config --local receive.denyCurrentBranch updateInstead
+popd
 
 rem fetch tools
 %PAKETBOOTSTRAP%
