@@ -13,15 +13,23 @@ set LOCALCSREPO=%HERE%local\cassandra-sharp
 set LOCALCSCREPO=%HERE%local\cassandra-sharp-contrib
 set LOCALBIN=%HERE%local\bin
 set QAFOLDER=%HERE%qa-setup
+
+taskkill /im tgitcache.exe
 rmdir /s /q %QAFOLDER%
 
 %FULLBUILD% setup git %LOCALFBREPO% %LOCALBIN% %QAFOLDER% || goto :ko
 cd %QAFOLDER% || goto :ko
 
+pushd .full-build
+echo framework: net45 > paket.dependencies
+popd
+
 %FULLBUILD% add nuget https://www.nuget.org/api/v2/ || goto :ko
 %FULLBUILD% add repo cassandra-sharp %LOCALCSREPO% || goto :ko
 %FULLBUILD% add repo cassandra-sharp-contrib %LOCALCSCREPO% || goto :ko
-%FULLBUILD% clone *  || goto :ko
+%FULLBUILD% clone * || goto :ko
+%FULLBUILD% branch || goto :ko
+%FULLBUILD% list repo || goto :ko
 %FULLBUILD% index * || goto :ko
 %FULLBUILD% install || goto :ko
 %FULLBUILD% convert * || goto :ko
@@ -34,10 +42,13 @@ cd %QAFOLDER% || goto :ko
 %FULLBUILD% drop view csc || goto :ko
 %FULLBUILD% outdated package || goto :ko
 %FULLBUILD% update package || goto :ko
+%FULLBUILD% install || goto :ko
+%FULLBUILD% add app cqlplus.zip zip cqlplus || goto :ko
+%FULLBUILD% list app || goto :ko
+%FULLBUILD% publish cqlplus || goto :ko
 %FULLBUILD% push --full 42 || goto :ko
-%FULLBUILD% branch || goto :ko
 %FULLBUILD% history || goto :ko
-
+%FULLBUILD% pull || goto :ko
 
 pushd .full-build
 git add *

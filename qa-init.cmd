@@ -13,6 +13,8 @@ set LOCALCSREPO=%HERE%local\cassandra-sharp
 set LOCALCSCREPO=%HERE%local\cassandra-sharp-contrib
 set LOCALBIN=%HERE%local\bin
 set QAFOLDER=%HERE%qa-init
+
+taskkill /im tgitcache.exe
 rmdir /s /q %QAFOLDER%
 
 %FULLBUILD% init git %LOCALFBREPO% %QAFOLDER% || goto :ko
