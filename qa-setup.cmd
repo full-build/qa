@@ -42,10 +42,7 @@ popd
 %FULLBUILD% drop view csc || goto :ko
 %FULLBUILD% add app cqlplus.zip zip cqlplus || goto :ko
 %FULLBUILD% list app || goto :ko
-%FULLBUILD% publish cqlplus || goto :ko
-%FULLBUILD% push --full 1.0.0 || goto :ko
-%FULLBUILD% history || goto :ko
-%FULLBUILD% pull || goto :ko
+%FULLBUILD% publish cqlplus.zip || goto :ko
 
 pushd .full-build
 git add *
@@ -65,6 +62,8 @@ git commit -am "qa"
 git push origin master:master
 popd
 
+%FULLBUILD% push --full 1.0.0 || goto :ko
+%FULLBUILD% list app --version 1.0.0 || goto :ko
 
 :ok
 echo *** SUCCESSFUL
