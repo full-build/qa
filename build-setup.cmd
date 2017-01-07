@@ -33,7 +33,7 @@ cd %QAFOLDER% || goto :ko
 %FULLBUILD% drop view csc || goto :ko
 %FULLBUILD% outdated package || goto :ko
 %FULLBUILD% update package || goto :ko
-%FULLBUILD% push 42 || goto :ko
+%FULLBUILD% push --full 42 || goto :ko
 %FULLBUILD% history || goto :ko
 
 :ok
