@@ -1,26 +1,25 @@
 setlocal
 set HERE=%~dp0
-set PAKETBOOTSTRAP=%HERE%tools/paket.bootstrapper.exe
 set PAKET=%HERE%tools/paket.exe
-set FULLBUILD=%HERE%packages/full-build/tools/fullbuild.exe
+rem set FULLBUILD=%HERE%packages/full-build/tools/fullbuild.exe
+set FULLBUILD=fullbuild.exe --verbose
 
-set PATH=%PATH%;%HERE%packages\Paket\tools
 set PATH=%PATH%;%HERE%packages\NUnit.ConsoleRunner\tools
 set PATH=%PATH%;%HERE%packages\full-build\tools
 
+set LOCALFBREPO=%HERE%local\full-build
+set LOCALCSREPO=%HERE%local\cassandra-sharp
+set LOCALCSCREPO=%HERE%local\cassandra-sharp-contrib
+set LOCALBIN=%HERE%local\bin
 set QAFOLDER=%HERE%qa-cassandrasharp
 rmdir /s /q %QAFOLDER%
 
-%PAKETBOOTSTRAP%
-%PAKET% restore || goto :ko
-type %HERE%paket.lock
-
-%FULLBUILD% setup git https://github.com/pchalamet/cassandra-sharp-full-build %HERE%binrepo %QAFOLDER% || goto :ko
+%FULLBUILD% setup git %LOCALFBREPO% %LOCALBIN% %QAFOLDER% || goto :ko
 cd %QAFOLDER% || goto :ko
 
 %FULLBUILD% add nuget https://www.nuget.org/api/v2/ || goto :ko
-%FULLBUILD% add repo cassandra-sharp https://github.com/pchalamet/cassandra-sharp || goto :ko
-%FULLBUILD% add repo cassandra-sharp-contrib https://github.com/pchalamet/cassandra-sharp-contrib || goto :ko
+%FULLBUILD% add repo cassandra-sharp %LOCALCSREPO% || goto :ko
+%FULLBUILD% add repo cassandra-sharp-contrib %LOCALCSCREPO% || goto :ko
 %FULLBUILD% clone *  || goto :ko
 %FULLBUILD% index * || goto :ko
 %FULLBUILD% convert * || goto :ko
@@ -31,11 +30,11 @@ cd %QAFOLDER% || goto :ko
 %FULLBUILD% describe view all || goto :ko
 %FULLBUILD% graph all || goto :ko
 %FULLBUILD% build all || goto :ko
-rem %FULLBUILD% history || goto :ko
 %FULLBUILD% drop view csc || goto :ko
 %FULLBUILD% outdated package || goto :ko
 %FULLBUILD% update package || goto :ko
-rem %FULLBUILD% push 42 || goto :ko
+%FULLBUILD% push 42 || goto :ko
+%FULLBUILD% history || goto :ko
 
 :ok
 echo *** SUCCESSFUL

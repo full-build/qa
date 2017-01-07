@@ -9,6 +9,7 @@ obj
 packages
 views
 qa-*
+local
 tools/paket.exe
 !/bootstrap/packages
 !/bootstrap/bin

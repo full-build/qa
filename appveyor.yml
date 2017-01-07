@@ -9,7 +9,9 @@ skip_tags: true
 shallow_clone: true
 
 build_script:
-  - cmd: build.cmd
+  - cmd: |
+      prepare.cmd
+      build-setup.cmd
 
 test: off
   
