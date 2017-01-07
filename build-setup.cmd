@@ -5,6 +5,7 @@ rem set FULLBUILD=%HERE%packages/full-build/tools/fullbuild.exe
 set FULLBUILD=fullbuild.exe --verbose
 
 set PATH=%PATH%;%HERE%packages\NUnit.ConsoleRunner\tools
+set PATH=%PATH%;%HERE%packages\Paket\tools
 set PATH=%PATH%;%HERE%packages\full-build\tools
 
 set LOCALFBREPO=%HERE%local\full-build
