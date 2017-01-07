@@ -1,7 +1,7 @@
 setlocal
 set HERE=%~dp0
 set PAKET=%HERE%tools/paket.exe
-rem set FULLBUILD=%HERE%packages/full-build/tools/fullbuild.exe
+rem set FULLBUILD=%HERE%packages/full-build/tools/fullbuild.exe --verbose
 set FULLBUILD=fullbuild.exe --verbose
 
 set PATH=%PATH%;%HERE%packages\NUnit.ConsoleRunner\tools

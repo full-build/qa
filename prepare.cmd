@@ -26,12 +26,12 @@ git commit -am "initial commit"
 popd
 
 rem cloning repositories
-git clone https://github.com/pchalamet/cassandra-sharp %LOCALCSREPO%
+git clone --depth=1 https://github.com/pchalamet/cassandra-sharp %LOCALCSREPO%
 pushd %LOCALCSREPO%
 git config --local receive.denyCurrentBranch updateInstead
 popd
 
-git clone https://github.com/pchalamet/cassandra-sharp-contrib %LOCALCSCREPO%
+git clone --depth=1 https://github.com/pchalamet/cassandra-sharp-contrib %LOCALCSCREPO%
 pushd %LOCALCSCREPO%
 git config --local receive.denyCurrentBranch updateInstead
 popd
