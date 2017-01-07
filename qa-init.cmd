@@ -1,4 +1,5 @@
 setlocal
+echo on
 set HERE=%~dp0
 set PAKET=%HERE%tools/paket.exe
 rem set FULLBUILD=%HERE%packages/full-build/tools/fullbuild.exe
