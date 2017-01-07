@@ -21,7 +21,7 @@ git init %LOCALFBREPO%
 pushd %LOCALFBREPO%
 echo dummy > dummy.txt
 git add dummy.txt
-git ci -am "initial commit"
+git commit -am "initial commit"
 popd
 
 rem cloning repositories
