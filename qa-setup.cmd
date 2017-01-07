@@ -40,13 +40,10 @@ popd
 %FULLBUILD% graph all || goto :ko
 %FULLBUILD% build all || goto :ko
 %FULLBUILD% drop view csc || goto :ko
-%FULLBUILD% outdated package || goto :ko
-%FULLBUILD% update package || goto :ko
-%FULLBUILD% install || goto :ko
 %FULLBUILD% add app cqlplus.zip zip cqlplus || goto :ko
 %FULLBUILD% list app || goto :ko
 %FULLBUILD% publish cqlplus || goto :ko
-%FULLBUILD% push --full 42 || goto :ko
+%FULLBUILD% push --full 1.0.0 || goto :ko
 %FULLBUILD% history || goto :ko
 %FULLBUILD% pull || goto :ko
 
