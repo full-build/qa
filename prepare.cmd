@@ -18,9 +18,13 @@ mkdir %LOCALBIN%
 rem creating master repository
 mkdir %LOCALFBREPO%
 git init %LOCALFBREPO%
+pushd %LOCALFBREPO%
+echo dummy > dummy.txt
+git add dummy.txt
+git ci -am "initial commit"
+popd
 
 rem cloning repositories
-mkdir %LOCALFOLDER%
 git clone https://github.com/pchalamet/cassandra-sharp %LOCALFOLDER%\cassandra-sharp
 git clone https://github.com/pchalamet/cassandra-sharp-contrib %LOCALFOLDER%\cassandra-sharp-contrib
 
