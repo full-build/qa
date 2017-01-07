@@ -25,6 +25,7 @@ cd %QAFOLDER% || goto :ko
 %FULLBUILD% view csc cassandra-sharp-contrib/* || goto :ko
 %FULLBUILD% build all || goto :ko
 %FULLBUILD% history || goto :ko
+%FULLBUILD% publish *  || goto :ko
 
 :ok
 echo *** SUCCESSFUL
