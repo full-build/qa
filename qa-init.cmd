@@ -30,8 +30,6 @@ cd %QAFOLDER% || goto :ko
 %FULLBUILD% view all * || goto :ko
 %FULLBUILD% view csc cassandra-sharp-contrib/* || goto :ko
 %FULLBUILD% build all || goto :ko
-%FULLBUILD% history || goto :ko
-%FULLBUILD% publish *  || goto :ko
 
 pushd .full-build
 git add *
@@ -51,6 +49,8 @@ git commit -am "qa"
 git push origin master:master
 popd
 
+%FULLBUILD% history || goto :ko
+%FULLBUILD% publish *  || goto :ko
 %FULLBUILD% push --full 2.0.0 || goto :ko
 %FULLBUILD% list app --version 2.0.0 || goto :ko
 
