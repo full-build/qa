@@ -25,24 +25,24 @@ pushd .full-build
 echo framework: net45 > paket.dependencies
 popd
 
-%FULLBUILD% add nuget https://www.nuget.org/api/v2/ || goto :ko
-%FULLBUILD% add repo cassandra-sharp %LOCALCSREPO% || goto :ko
-%FULLBUILD% add repo cassandra-sharp-contrib %LOCALCSCREPO% || goto :ko
+%FULLBUILD% nuget add https://www.nuget.org/api/v2/ || goto :ko
+%FULLBUILD% repo add cassandra-sharp %LOCALCSREPO% || goto :ko
+%FULLBUILD% repo add cassandra-sharp-contrib %LOCALCSCREPO% || goto :ko
 %FULLBUILD% clone * || goto :ko
 %FULLBUILD% branch || goto :ko
-%FULLBUILD% list repo || goto :ko
+%FULLBUILD% repo list || goto :ko
 %FULLBUILD% index * || goto :ko
 %FULLBUILD% install || goto :ko
 %FULLBUILD% convert * || goto :ko
 %FULLBUILD% view all * || goto :ko
 %FULLBUILD% view csc cassandra-sharp-contrib/* || goto :ko
-%FULLBUILD% list view || goto :ko
-%FULLBUILD% describe view all || goto :ko
+%FULLBUILD% view list || goto :ko
+%FULLBUILD% view describe all || goto :ko
 %FULLBUILD% graph all || goto :ko
 %FULLBUILD% build all || goto :ko
-%FULLBUILD% drop view csc || goto :ko
-%FULLBUILD% add app cqlplus.zip zip cqlplus || goto :ko
-%FULLBUILD% list app || goto :ko
+%FULLBUILD% view drop csc || goto :ko
+%FULLBUILD% app add cqlplus.zip zip cqlplus || goto :ko
+%FULLBUILD% app list || goto :ko
 %FULLBUILD% publish cqlplus.zip || goto :ko
 
 pushd .full-build
@@ -64,7 +64,7 @@ git push origin master:master
 popd
 
 %FULLBUILD% push --full 1.0.0 || goto :ko
-%FULLBUILD% list app --version 1.0.0 || goto :ko
+%FULLBUILD% app list --version 1.0.0 || goto :ko
 
 :ok
 echo *** SUCCESSFUL

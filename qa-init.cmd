@@ -22,8 +22,8 @@ rmdir /s /q %QAFOLDER%
 cd %QAFOLDER% || goto :ko
 %FULLBUILD% clone *  || goto :ko
 
-%FULLBUILD% outdated package || goto :ko
-%FULLBUILD% update package || goto :ko
+%FULLBUILD% package outdated || goto :ko
+%FULLBUILD% package update || goto :ko
 %FULLBUILD% install || goto :ko
 %FULLBUILD% pull || goto :ko
 
@@ -52,7 +52,7 @@ popd
 %FULLBUILD% history || goto :ko
 %FULLBUILD% publish *  || goto :ko
 %FULLBUILD% push --full 2.0.0 || goto :ko
-%FULLBUILD% list app --version 2.0.0 || goto :ko
+%FULLBUILD% app list --version 2.0.0 || goto :ko
 
 
 :ok
