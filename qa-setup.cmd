@@ -63,7 +63,8 @@ git commit -am "qa"
 git push origin master:master
 popd
 
-%FULLBUILD% push --full 1.0.0 || goto :ko
+%FULLBUILD% tag --full 1.0.0 || goto :ko
+%FULLBUILD% push || goto :ko
 %FULLBUILD% app list --version 1.0.0 || goto :ko
 
 :ok
