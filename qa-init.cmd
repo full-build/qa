@@ -50,9 +50,8 @@ git push origin master:master
 popd
 
 %FULLBUILD% history || goto :ko
-%FULLBUILD% publish *  || goto :ko
 %FULLBUILD% tag --full 2.0.0 || goto :ko
-%FULLBUILD% push || goto :ko
+%FULLBUILD% publish --push *  || goto :ko
 %FULLBUILD% app list --version 2.0.0 || goto :ko
 
 

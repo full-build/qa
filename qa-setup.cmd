@@ -43,7 +43,6 @@ popd
 %FULLBUILD% view drop csc || goto :ko
 %FULLBUILD% app add cqlplus.zip zip cqlplus || goto :ko
 %FULLBUILD% app list || goto :ko
-%FULLBUILD% publish cqlplus.zip || goto :ko
 
 pushd .full-build
 git add *
@@ -64,7 +63,7 @@ git push origin master:master
 popd
 
 %FULLBUILD% tag --full 1.0.0 || goto :ko
-%FULLBUILD% push || goto :ko
+%FULLBUILD% publish --push cqlplus.zip || goto :ko
 %FULLBUILD% app list --version 1.0.0 || goto :ko
 
 :ok
