@@ -73,4 +73,4 @@ exit /b 0
 :ko
 cd %HERE%
 echo *** FAILURE
-exit /b 0
+exit /b 5
