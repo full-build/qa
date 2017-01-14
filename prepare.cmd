@@ -1,10 +1,10 @@
 setlocal
 set HERE=%~dp0
 set LOCALFOLDER=%HERE%local
-set LOCALFBREPO=%HERE%local\full-build
-set LOCALCSREPO=%HERE%local\cassandra-sharp
-set LOCALCSCREPO=%HERE%local\cassandra-sharp-contrib
-set LOCALBIN=%HERE%local\bin
+set LOCALFBREPO=%HERE%local\full-build-org
+set LOCALCSREPO=%HERE%local\cassandra-sharp-org
+set LOCALCSCREPO=%HERE%local\cassandra-sharp-contrib-org
+set LOCALBIN=%HERE%local\bin-org
 
 set PAKETBOOTSTRAP=%HERE%tools/paket.bootstrapper.exe
 set PAKET=%HERE%tools/paket.exe

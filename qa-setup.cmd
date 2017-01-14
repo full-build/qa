@@ -15,6 +15,10 @@ set LOCALCSCREPO=%HERE%local\cassandra-sharp-contrib
 set LOCALBIN=%HERE%local\bin
 set QAFOLDER=%HERE%qa-setup
 
+robocopy %LOCALFBREPO%-org %LOCALFBREPO% /MIR /NFL /NDL /NJH /NJS /nc /ns /np
+robocopy %LOCALCSREPO%-org %LOCALCSREPO% /MIR /NFL /NDL /NJH /NJS /nc /ns /np
+robocopy %LOCALCSCREPO%-org %LOCALCSCREPO% /MIR /NFL /NDL /NJH /NJS /nc /ns /np
+
 taskkill /im tgitcache.exe
 rmdir /s /q %QAFOLDER%
 
