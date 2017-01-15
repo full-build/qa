@@ -23,7 +23,7 @@ mkdir %LOCALBIN%
 
 taskkill /im tgitcache.exe
 timeout /t 2 /nobreak
-rmdir /s /q %QAFOLDER% || goto :ko
+rmdir /s /q %QAFOLDER%
 
 %FULLBUILD% setup git %LOCALFBREPO% %LOCALBIN% %QAFOLDER% || goto :ko
 cd %QAFOLDER% || goto :ko
