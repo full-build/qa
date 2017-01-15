@@ -16,6 +16,7 @@ set LOCALBIN=%HERE%local\bin
 set QAFOLDER=%HERE%qa-init
 
 taskkill /im tgitcache.exe
+timeout /t 2 /nobreak
 rmdir /s /q %QAFOLDER%
 
 %FULLBUILD% init git %LOCALFBREPO% %QAFOLDER% || goto :ko
@@ -56,6 +57,7 @@ popd
 
 
 :ok
+cd %HERE%
 echo *** SUCCESSFUL
 exit /b 0
 

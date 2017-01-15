@@ -18,9 +18,12 @@ set QAFOLDER=%HERE%qa-setup
 robocopy %LOCALFBREPO%-org %LOCALFBREPO% /MIR /NFL /NDL /NJH /NJS /nc /ns /np
 robocopy %LOCALCSREPO%-org %LOCALCSREPO% /MIR /NFL /NDL /NJH /NJS /nc /ns /np
 robocopy %LOCALCSCREPO%-org %LOCALCSCREPO% /MIR /NFL /NDL /NJH /NJS /nc /ns /np
+rmdir /s /q %LOCALBIN%
+mkdir %LOCALBIN%
 
 taskkill /im tgitcache.exe
-rmdir /s /q %QAFOLDER%
+timeout /t 2 /nobreak
+rmdir /s /q %QAFOLDER% || goto :ko
 
 %FULLBUILD% setup git %LOCALFBREPO% %LOCALBIN% %QAFOLDER% || goto :ko
 cd %QAFOLDER% || goto :ko
@@ -46,7 +49,6 @@ popd
 %FULLBUILD% build all || goto :ko
 %FULLBUILD% view drop csc || goto :ko
 %FULLBUILD% app add cqlplus.zip zip cqlplus || goto :ko
-%FULLBUILD% app list || goto :ko
 
 pushd .full-build
 git add *
@@ -68,9 +70,11 @@ popd
 
 %FULLBUILD% tag --full 1.0.0 || goto :ko
 %FULLBUILD% publish --push cqlplus.zip || goto :ko
+%FULLBUILD% app list || goto :ko
 %FULLBUILD% app list --version 1.0.0 || goto :ko
 
 :ok
+cd %HERE%
 echo *** SUCCESSFUL
 exit /b 0
 
