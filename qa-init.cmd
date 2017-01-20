@@ -15,6 +15,8 @@ set LOCALCSCREPO=%HERE%local\cassandra-sharp-contrib
 set LOCALBIN=%HERE%local\bin
 set QAFOLDER=%HERE%qa-init
 
+set VERSION=%TIME:~0,2%.%TIME:~3,2%.%TIME:~6,2%
+
 taskkill /im tgitcache.exe
 timeout /t 2 /nobreak
 rmdir /s /q %QAFOLDER%
@@ -22,11 +24,12 @@ rmdir /s /q %QAFOLDER%
 %FULLBUILD% init git %LOCALFBREPO% %QAFOLDER% || goto :ko
 cd %QAFOLDER% || goto :ko
 %FULLBUILD% clone *  || goto :ko
+%FULLBUILD% tag %VERSION% || goto :ko
 
+%FULLBUILD% pull || goto :ko
 %FULLBUILD% package outdated || goto :ko
 %FULLBUILD% package update || goto :ko
 %FULLBUILD% install || goto :ko
-%FULLBUILD% pull || goto :ko
 
 %FULLBUILD% view all * || goto :ko
 %FULLBUILD% view csc cassandra-sharp-contrib/* || goto :ko
@@ -51,9 +54,8 @@ git push origin master:master
 popd
 
 %FULLBUILD% history || goto :ko
-%FULLBUILD% tag --full 2.0.0 || goto :ko
-%FULLBUILD% publish --push *  || goto :ko
-%FULLBUILD% app list --version 2.0.0 || goto :ko
+%FULLBUILD% publish --inc --view all *  || goto :ko
+%FULLBUILD% app list --version %VERSION% || goto :ko
 
 
 :ok

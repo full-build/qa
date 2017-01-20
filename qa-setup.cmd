@@ -15,6 +15,8 @@ set LOCALCSCREPO=%HERE%local\cassandra-sharp-contrib
 set LOCALBIN=%HERE%local\bin
 set QAFOLDER=%HERE%qa-setup
 
+set VERSION=%TIME:~0,2%.%TIME:~3,2%.%TIME:~6,2%
+
 robocopy %LOCALFBREPO%-org %LOCALFBREPO% /MIR /NFL /NDL /NJH /NJS /nc /ns /np
 robocopy %LOCALCSREPO%-org %LOCALCSREPO% /MIR /NFL /NDL /NJH /NJS /nc /ns /np
 robocopy %LOCALCSCREPO%-org %LOCALCSCREPO% /MIR /NFL /NDL /NJH /NJS /nc /ns /np
@@ -36,6 +38,7 @@ popd
 %FULLBUILD% repo add cassandra-sharp %LOCALCSREPO% || goto :ko
 %FULLBUILD% repo add cassandra-sharp-contrib %LOCALCSCREPO% || goto :ko
 %FULLBUILD% clone * || goto :ko
+%FULLBUILD% tag %VERSION% || goto :ko
 %FULLBUILD% branch || goto :ko
 %FULLBUILD% repo list || goto :ko
 %FULLBUILD% index * || goto :ko
@@ -68,10 +71,9 @@ git commit -am "qa"
 git push origin master:master
 popd
 
-%FULLBUILD% tag --full 1.0.0 || goto :ko
-%FULLBUILD% publish --push cqlplus.zip || goto :ko
+%FULLBUILD% publish --full cqlplus.zip || goto :ko
 %FULLBUILD% app list || goto :ko
-%FULLBUILD% app list --version 1.0.0 || goto :ko
+%FULLBUILD% app list --version %VERSION% || goto :ko
 
 :ok
 cd %HERE%
