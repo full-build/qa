@@ -1,4 +1,5 @@
 source https://www.nuget.org/api/v2/
 nuget Paket
 nuget full-build prerelease
-nuget NUnit.runners
+nuget NUnit.ConsoleRunner 3.5
+nuget NUnit.Runners 3.5
