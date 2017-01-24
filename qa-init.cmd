@@ -24,7 +24,6 @@ rmdir /s /q %QAFOLDER%
 %FULLBUILD% init git %LOCALFBREPO% %QAFOLDER% || goto :ko
 cd %QAFOLDER% || goto :ko
 %FULLBUILD% clone *  || goto :ko
-%FULLBUILD% tag %VERSION% || goto :ko
 
 %FULLBUILD% pull || goto :ko
 %FULLBUILD% package outdated || goto :ko
@@ -54,7 +53,7 @@ git push origin master:master
 popd
 
 %FULLBUILD% history || goto :ko
-%FULLBUILD% publish --inc --view all *  || goto :ko
+%FULLBUILD% publish --version %VERSION% --view all *  || goto :ko
 %FULLBUILD% app list --version %VERSION% || goto :ko
 
 

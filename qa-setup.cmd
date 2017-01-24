@@ -38,7 +38,6 @@ popd
 %FULLBUILD% repo add cassandra-sharp %LOCALCSREPO% || goto :ko
 %FULLBUILD% repo add cassandra-sharp-contrib %LOCALCSCREPO% || goto :ko
 %FULLBUILD% clone * || goto :ko
-%FULLBUILD% tag %VERSION% || goto :ko
 %FULLBUILD% branch || goto :ko
 %FULLBUILD% repo list || goto :ko
 %FULLBUILD% index * || goto :ko
@@ -71,7 +70,7 @@ git commit -am "qa"
 git push origin master:master
 popd
 
-%FULLBUILD% publish --full cqlplus.zip || goto :ko
+%FULLBUILD% publish --full --version %VERSION% cqlplus.zip || goto :ko
 %FULLBUILD% app list || goto :ko
 %FULLBUILD% app list --version %VERSION% || goto :ko
 

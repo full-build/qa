@@ -1,6 +1,6 @@
 NUGET
   remote: https://www.nuget.org/api/v2
-    full-build (3.2.481-alpha)
+    full-build (4.0.497-alpha)
     NUnit.ConsoleRunner (3.5)
     NUnit.Extension.NUnitProjectLoader (3.5)
     NUnit.Extension.NUnitV2Driver (3.6)
@@ -14,4 +14,4 @@ NUGET
       NUnit.Extension.NUnitV2ResultWriter (>= 3.5)
       NUnit.Extension.TeamCityEventListener (>= 1.0.2)
       NUnit.Extension.VSProjectLoader (>= 3.5)
-    Paket (3.33.4)
+    Paket (3.33.5)
