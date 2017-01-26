@@ -20,11 +20,11 @@ set VERSION=%TIME:~0,2%.%TIME:~3,2%.%TIME:~6,2%
 robocopy %LOCALFBREPO%-org %LOCALFBREPO% /MIR /NFL /NDL /NJH /NJS /nc /ns /np
 robocopy %LOCALCSREPO%-org %LOCALCSREPO% /MIR /NFL /NDL /NJH /NJS /nc /ns /np
 robocopy %LOCALCSCREPO%-org %LOCALCSCREPO% /MIR /NFL /NDL /NJH /NJS /nc /ns /np
-rmdir /s /q %LOCALBIN% || goto :ko
-mkdir %LOCALBIN% || goto :ko
+rmdir /s /q %LOCALBIN%
+mkdir %LOCALBIN%
 
 taskkill /im tgitcache.exe
-rmdir /s /q %QAFOLDER% || goto :ko
+rmdir /s /q %QAFOLDER%
 
 %FULLBUILD% setup git %LOCALFBREPO% %LOCALBIN% %QAFOLDER% || goto :ko
 cd %QAFOLDER% || goto :ko

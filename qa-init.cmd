@@ -18,7 +18,7 @@ set QAFOLDER=%HERE%qa-init
 set VERSION=%TIME:~0,2%.%TIME:~3,2%.%TIME:~6,2%
 
 taskkill /im tgitcache.exe
-rmdir /s /q %QAFOLDER% || goto :ko
+rmdir /s /q %QAFOLDER%
 
 %FULLBUILD% init git %LOCALFBREPO% %QAFOLDER% || goto :ko
 cd %QAFOLDER% || goto :ko
