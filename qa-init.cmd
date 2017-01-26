@@ -18,17 +18,17 @@ set QAFOLDER=%HERE%qa-init
 set VERSION=%TIME:~0,2%.%TIME:~3,2%.%TIME:~6,2%
 
 taskkill /im tgitcache.exe
-timeout /t 2 /nobreak
-rmdir /s /q %QAFOLDER%
+rmdir /s /q %QAFOLDER% || goto :ko
 
 %FULLBUILD% init git %LOCALFBREPO% %QAFOLDER% || goto :ko
 cd %QAFOLDER% || goto :ko
-%FULLBUILD% clone *  || goto :ko
+%FULLBUILD% clone * || goto :ko
+goto :ok
 
-%FULLBUILD% pull || goto :ko
+%FULLBUILD% install || goto :ko
 %FULLBUILD% package outdated || goto :ko
 %FULLBUILD% package update || goto :ko
-%FULLBUILD% install || goto :ko
+%FULLBUILD% convert --check * || goto :ko
 
 %FULLBUILD% view all * || goto :ko
 %FULLBUILD% view csc cassandra-sharp-contrib/* || goto :ko
