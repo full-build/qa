@@ -24,7 +24,11 @@ rmdir /s /q %LOCALBIN%
 mkdir %LOCALBIN%
 
 taskkill /im tgitcache.exe
-rmdir /s /q %QAFOLDER%
+:qa_folder_delete
+    if not exist %QAFOLDER% goto :qa_folder_deleted
+    rmdir /s /q %QAFOLDER%
+goto :qa_folder_delete
+:qa_folder_deleted
 
 %FULLBUILD% setup git %LOCALFBREPO% %LOCALBIN% %QAFOLDER% || goto :ko
 cd %QAFOLDER% || goto :ko

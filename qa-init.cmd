@@ -18,13 +18,15 @@ set QAFOLDER=%HERE%qa-init
 set VERSION=%TIME:~0,2%.%TIME:~3,2%.%TIME:~6,2%
 
 taskkill /im tgitcache.exe
-rmdir /s /q %QAFOLDER%
+:qa_folder_delete
+    if not exist %QAFOLDER% goto :qa_folder_deleted
+    rmdir /s /q %QAFOLDER%
+goto :qa_folder_delete
+:qa_folder_deleted
 
 %FULLBUILD% init git %LOCALFBREPO% %QAFOLDER% || goto :ko
 cd %QAFOLDER% || goto :ko
 %FULLBUILD% clone * || goto :ko
-goto :ok
-
 %FULLBUILD% install || goto :ko
 %FULLBUILD% package outdated || goto :ko
 %FULLBUILD% package update || goto :ko
